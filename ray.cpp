@@ -35,6 +35,7 @@ void Ray::draw(sf::RenderWindow &window) {
   window.draw(m_shape);
   window.draw(m_start_circle);
   window.draw(m_end_circle);
+	window.draw(m_intersection_circle);
 }
 
 void Ray::cast(const Obstacle &obstacle) {
@@ -51,10 +52,10 @@ void Ray::cast(const Obstacle &obstacle) {
   sf::Vector2f r1 = m_segment.getStartPoint();
   sf::Vector2f r2 = m_segment.getEndPoint();
 
-	std::cout << "s1 (" << s1.x << ", " << s1.y << ")" << std::endl;
-	std::cout << "s2 (" << s2.x << ", " << s2.y << ")" << std::endl;
-	std::cout << "r1 (" << r1.x << ", " << r1.y << ")" << std::endl;
-	std::cout << "r2 (" << r2.x << ", " << r2.y << ")" << std::endl;
+  std::cout << "s1 (" << s1.x << ", " << s1.y << ")" << std::endl;
+  std::cout << "s2 (" << s2.x << ", " << s2.y << ")" << std::endl;
+  std::cout << "r1 (" << r1.x << ", " << r1.y << ")" << std::endl;
+  std::cout << "r2 (" << r2.x << ", " << r2.y << ")" << std::endl;
 
   float denom = (r1.x - r2.x) * (s1.y - s2.y) - (r1.y - r2.y) * (s1.x - s2.x);
 
@@ -63,15 +64,21 @@ void Ray::cast(const Obstacle &obstacle) {
   float st =
       ((r2.x - r1.x) * (r1.y - s1.y) - (r2.y - r1.y) * (r1.x - s1.x)) / denom;
 
-	std::cout << "denom: " << denom << std::endl;
-	std::cout << "rt: " << rt << std::endl;
-	std::cout << "st: " << st << std::endl;
+  std::cout << "denom: " << denom << std::endl;
+  std::cout << "rt: " << rt << std::endl;
+  std::cout << "st: " << st << std::endl;
 
   if (!isIntersecting(rt, st)) {
     std::cout << "Not intersecting" << std::endl;
     return;
   }
   std::cout << "Intersecting" << std::endl;
+
+  float intersection_x = r1.x + rt * (r2.x - r1.x);
+  float intersection_y = r1.y + rt * (r2.y - r1.y);
+  m_intersection_circle.setRadius(CIRCLE_RADIUS);
+  m_intersection_circle.setPosition(intersection_x, intersection_y);
+	m_intersection_circle.setFillColor(sf::Color::Green);
 }
 
 bool Ray::isIntersecting(float ray_parameter, float segment_parameter) {

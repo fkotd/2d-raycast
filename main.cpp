@@ -5,7 +5,7 @@
 int main() {
   sf::RenderWindow window(sf::VideoMode(800, 800), "SFML works!");
 
-  Ray ray(sf::Vector2f(200.f, 400.f), 20.f);
+  Ray ray(sf::Vector2f(200.f, 400.f), 10.f);
 
   std::vector<sf::Vector2f> points{sf::Vector2f(600.f, 300.f), sf::Vector2f(700.f, 300.f),
                                    sf::Vector2f(700.f, 500.f), sf::Vector2f(600.f, 500.f)};

@@ -11,6 +11,7 @@ class Ray {
   sf::CircleShape m_start_circle;
   sf::CircleShape m_end_circle;
   sf::RectangleShape m_shape;
+	sf::CircleShape m_intersection_circle;
 
 public:
   Ray(const sf::Vector2f &start_point, float direction);
