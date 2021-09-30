@@ -8,8 +8,9 @@ sfml_system = dependency('sfml-system')
 
 executable('raycast',
            'segment.cpp',
-           'ray.cpp',
 					 'obstacle.cpp',
+           'ray.cpp',
+					 'source.cpp',
            'main.cpp',
 					 dependencies : [sfml_graphics, sfml_window, sfml_system],
            install : true)
